@@ -29,7 +29,7 @@ class Artist(models.Model):
 
 class Songs(models.Model):
     title = models.CharField(max_length=40)
-    image = models.ImageField(upload_to="images")
+    image = models.ImageField(upload_to="images",blank=True)
     song = models.FileField(upload_to="audio")
     language = models.CharField(max_length=1,choices=LANGUAGE_CHOICES)
     artist = models .ForeignKey(Artist,on_delete=models.CASCADE)
@@ -39,8 +39,8 @@ class Songs(models.Model):
 
 class Playlist(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
-    playlist_name = models.CharField(max_length=40)
-    song = models.ForeignKey(Songs,on_delete=models.CASCADE)
+    playlist_name = models.CharField(max_length=40,blank=False,null= False)
+    song = models.ManyToManyField(Songs)
     def __str__(self):
         return self.playlist_name
 

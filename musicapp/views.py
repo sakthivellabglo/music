@@ -65,7 +65,14 @@ class CreatePlaylist(viewsets.ModelViewSet):
         IsAuthenticated, ]
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
+    
+    def list(self, request, *args, **kwargs):
+        queryset = self.filter_queryset(self.get_queryset())
+        queryset = queryset.filter(user=self.request.user)
+        serializer = self.get_serializer(queryset, many=True)
+        return Response(serializer.data)
 
+        
 class CreateDeleteLikeView(viewsets.ModelViewSet):
     queryset = Favourite.objects.all()
     serializer_class = FavSerializer
@@ -78,6 +85,11 @@ class CreateDeleteLikeView(viewsets.ModelViewSet):
             subset.first().delete()
             return
         serializer.save(user = self.request.user)
+    def list(self, request, *args, **kwargs):
+        queryset = self.filter_queryset(self.get_queryset())
+        queryset = queryset.filter(user=self.request.user)
+        serializer = self.get_serializer(queryset, many=True)
+        return Response(serializer.data)
         
 class ResentList(viewsets.ModelViewSet):
    
@@ -87,4 +99,9 @@ class ResentList(viewsets.ModelViewSet):
         IsAuthenticated, ]
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
+    def list(self, request, *args, **kwargs):
+        queryset = self.filter_queryset(self.get_queryset())
+        queryset = queryset.filter(user=self.request.user)
+        serializer = self.get_serializer(queryset, many=True)
+        return Response(serializer.data)
     

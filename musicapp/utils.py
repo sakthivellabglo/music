@@ -12,7 +12,7 @@ def get_tokens_for_user(user):
 def get_role(user):
     if user.is_staff:
         return "admin"
-    elif user.is_vendor:
+    else:
         return "user"
 
         

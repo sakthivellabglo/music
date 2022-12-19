@@ -1,4 +1,4 @@
-from .models import  Artist, Playlist, Profile, Resent, Songs
+from .models import  Artist, Favourite, Playlist, Profile, Resent, Songs
 from django.contrib.auth.models import User
 from rest_framework import serializers
 
@@ -27,6 +27,7 @@ class UserSerializer(serializers.ModelSerializer):
             "password",
             "first_name",
             "last_name",
+            "email",
             "profile",
         )
         extra_kwargs = {"id": {"read_only": True},}
@@ -37,6 +38,7 @@ class UserSerializer(serializers.ModelSerializer):
             username=validated_data["username"],
             first_name=validated_data["first_name"],
             last_name=validated_data["last_name"],
+            email=validated_data["email"],
         )
         user.set_password(validated_data["password"])
         user.save()
@@ -71,17 +73,17 @@ class SongSerializer(serializers.ModelSerializer):
 class PlaylistSerializer(serializers.ModelSerializer):
     class Meta:
         model = Playlist
-        fields = ("user", "song","playlist_name")
-        read_only_fields = ("user",)
+        fields = ("id","user", "song","playlist_name")
+        read_only_fields = ("user","id")
 
 class FavSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Playlist
-        fields = ("user", "song",)
-        read_only_fields = ("user",)
+        model = Favourite
+        fields = ("id","user", "song",)
+        read_only_fields = ("user","id")
         
 class ResentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Resent
-        fields = ("user", "song",)
-        read_only_fields = ("user",)
+        fields = ("id","user", "song",)
+        read_only_fields = ("user","id")
