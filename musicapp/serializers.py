@@ -13,7 +13,7 @@ class LoginSerializer(serializers.ModelSerializer):
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
-        fields = ("gender", "image", "age",)
+        fields = ("gender", "age",)
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -63,12 +63,13 @@ class UserSerializer(serializers.ModelSerializer):
 class ArtistSerializer(serializers.ModelSerializer):
     class Meta:
         model = Artist
-        fields = ( "name","image","DOB","language")
+        fields = ("id", "name","image","DOB","language")
 
 class SongSerializer(serializers.ModelSerializer):
     class Meta:
         model = Songs
-        fields = ("title", "image", "song","language","artist")
+        fields = ("id","title", "image", "song","language","artist")
+
 
 class PlaylistSerializer(serializers.ModelSerializer):
     class Meta:
@@ -86,4 +87,4 @@ class ResentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Resent
         fields = ("id","user", "song",)
-        read_only_fields = ("user","id")
+        read_only_fields = ("user","id")    

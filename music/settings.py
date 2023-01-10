@@ -81,8 +81,8 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'music.wsgi.application'
 
-
-# Database
+#python3 manage.py runserver 0.0.0.0:7000 //
+# Database  http://192.168.1.75:7000/ http://192.168.1.75:7000/
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
@@ -124,6 +124,8 @@ USE_I18N = True
 USE_TZ = True
 
 
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",]
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
@@ -151,3 +153,16 @@ os.path.join(BASE_DIR, "images"),
 
 ]
 STATIC_DIR = os.path.join(BASE_DIR, 'images')
+import datetime
+
+JWT_AUTH = {
+    # how long the original token is valid for
+    'ACCESS_TOKEN_LIFETIME': datetime.timedelta(days=2),
+
+    # allow refreshing of tokens
+    'JWT_ALLOW_REFRESH': True,
+
+    # this is the maximum time AFTER the token was issued that
+    # it can be refreshed.  exprired tokens can't be refreshed.
+    'REFRESH_TOKEN_LIFETIME': datetime.timedelta(days=7),
+}

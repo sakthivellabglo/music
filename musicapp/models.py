@@ -15,7 +15,7 @@ LANGUAGE_CHOICES = (
 class Profile(models.Model):
     user =models.OneToOneField(User,on_delete=models.CASCADE)
     gender = models.CharField(max_length=1,choices=GENDER_CHOICES)
-    image = models.ImageField(upload_to="images")
+    #image = models.ImageField(upload_to="images")
     age = models.PositiveSmallIntegerField()
 
 
